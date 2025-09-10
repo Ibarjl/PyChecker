@@ -1,0 +1,24 @@
+{
+    "repositorios": {
+        "ejemplo_app": {
+            "nombre": "Aplicación de Ejemplo",
+            "ruta_logs": "./logs/ejemplo.log",
+            "descripcion": "Archivo de ejemplo - modificar según necesidades"
+        },
+        "api_service": {
+            "nombre": "API Service",
+            "ruta_logs": "../api-service/logs/service.log",
+            "descripcion": "Logs del servicio API"
+        },
+        "background_jobs": {
+            "nombre": "Background Jobs",
+            "ruta_logs": "/var/log/jobs/worker.log",
+            "descripcion": "Logs de tareas en segundo plano"
+        }
+    },
+    "configuracion_general": {
+        "timeout_archivo": 30,
+        "encoding": "utf-8",
+        "mostrar_timestamp": true
+    }
+}
