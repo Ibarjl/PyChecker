@@ -21,56 +21,6 @@ def read_from_k8s():
 
 def read_from_file():
     file_path = input("Ruta del fichero de logs: ")
-    mostrar_logs_archivo(file_path)
-
-def monitor_file_realtime():
-    file_path = input("Ruta del fichero de logs a monitorear: ")
-    monitorear_archivo(file_path)
-
-def monitor_external_app():
-    rutas_comunes = [
-        "../otro-repositorio/logs/app.log",
-        "../otro-repositorio/output.log", 
-        "./logs/external.log",
-        "C:/logs/sistema.log"
-    ]
-    print("Rutas disponibles:")
-    for i, ruta in enumerate(rutas_comunes, 1):
-        print(f"{i}. {ruta}")
-    print(f"{len(rutas_comunes) + 1}. Escribir ruta personalizada")
-    opcion = input(f"Elige una opción (1-{len(rutas_comunes) + 1}): ")
-    if opcion.isdigit() and 1 <= int(opcion) <= len(rutas_comunes):
-        ruta_archivo = rutas_comunes[int(opcion) - 1]
-    else:
-        ruta_archivo = input("Escribe la ruta completa: ")
-    monitorear_archivo(ruta_archivo)
-
-def monitor_configured_repos():
-    repositorios = listar_repositorios_disponibles()
-    if not repositorios:
-        print("Error: No hay repositorios configurados")
-        print("Edita config/monitor_config.json para agregar repositorios")
-        return
-    print("Repositorios disponibles:")
-    for i, repo in enumerate(repositorios, 1):
-        print(f"{i}. {repo['nombre']}")
-        print(f"   Ruta: {repo['ruta']}")
-        print(f"   {repo['descripcion']}")
-        print()
-    print(f"{len(repositorios) + 1}. Ruta personalizada")
-    opcion = input(f"Elige una opción (1-{len(repositorios) + 1}): ")
-    if opcion.isdigit() and 1 <= int(opcion) <= len(repositorios):
-        repo_seleccionado = repositorios[int(opcion) - 1]
-        ruta_archivo = repo_seleccionado['ruta']
-        print(f"Monitoreando: {repo_seleccionado['nombre']}")
-        print(f"Archivo: {ruta_archivo}")
-    else:
-        ruta_archivo = input("Escribe la ruta completa: ")
-    monitorear_archivo(ruta_archivo)
-def mostrar_logs_archivo(file_path):
-    """
-    Muestra las últimas 50 líneas de un archivo de log
-    """
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             logs = "".join(f.readlines()[-50:])
@@ -79,21 +29,93 @@ def mostrar_logs_archivo(file_path):
     except Exception as e:
         print(f"[ERROR] No se pudieron leer los logs del fichero {file_path}: {e}")
 
-def monitorear_archivo(file_path):
+def monitor_file_realtime():
     """
-    Monitorea un archivo en tiempo real
+    Monitorea un archivo específico en tiempo real
     """
+    file_path = input("Ruta del fichero de logs a monitorear: ")
+    
     if not file_path.strip():
         print("Error: No se proporcionó ninguna ruta")
         return
+    
     print(f"Monitoreando: {file_path}")
     print("Presiona Ctrl+C para volver al menú")
+    
     try:
         monitorear_log(file_path)
     except KeyboardInterrupt:
         print("\nVolviendo al menú principal...")
     except Exception as e:
         print(f"Error monitoreando archivo: {e}")
+
+def monitor_external_app():
+    """
+    Monitorea logs de una aplicación externa usando rutas predefinidas
+    """
+    # Configurar rutas comunes donde otras apps guardan logs
+    rutas_comunes = [
+        "../otro-repositorio/logs/app.log",
+        "../otro-repositorio/output.log", 
+        "./logs/external.log",
+        "C:/logs/sistema.log"
+    ]
+    
+    print("Rutas disponibles:")
+    for i, ruta in enumerate(rutas_comunes, 1):
+        print(f"{i}. {ruta}")
+    
+    print(f"{len(rutas_comunes) + 1}. Escribir ruta personalizada")
+    
+    opcion = input(f"Elige una opción (1-{len(rutas_comunes) + 1}): ")
+    
+    try:
+        if opcion.isdigit() and 1 <= int(opcion) <= len(rutas_comunes):
+            ruta_archivo = rutas_comunes[int(opcion) - 1]
+        else:
+            ruta_archivo = input("Escribe la ruta completa: ")
+        
+        print(f"Monitoreando: {ruta_archivo}")
+        monitorear_log(ruta_archivo)
+        
+    except KeyboardInterrupt:
+        print("\nVolviendo al menú principal...")
+
+def monitor_configured_repos():
+    """
+    Monitorea repositorios configurados en el archivo de configuración
+    """
+    repositorios = listar_repositorios_disponibles()
+    
+    if not repositorios:
+        print("Error: No hay repositorios configurados")
+        print("Edita config/monitor_config.json para agregar repositorios")
+        return
+    
+    print("Repositorios disponibles:")
+    for i, repo in enumerate(repositorios, 1):
+        print(f"{i}. {repo['nombre']}")
+        print(f"   Ruta: {repo['ruta']}")
+        print(f"   {repo['descripcion']}")
+        print()
+    
+    print(f"{len(repositorios) + 1}. Ruta personalizada")
+    
+    opcion = input(f"Elige una opción (1-{len(repositorios) + 1}): ")
+    
+    try:
+        if opcion.isdigit() and 1 <= int(opcion) <= len(repositorios):
+            repo_seleccionado = repositorios[int(opcion) - 1]
+            ruta_archivo = repo_seleccionado['ruta']
+            print(f"Monitoreando: {repo_seleccionado['nombre']}")
+            print(f"Archivo: {ruta_archivo}")
+        else:
+            ruta_archivo = input("Escribe la ruta completa: ")
+        
+        monitorear_log(ruta_archivo)
+        
+    except KeyboardInterrupt:
+        print("\nVolviendo al menú principal...")
 
 def execute_and_monitor():
     """
@@ -190,107 +212,6 @@ def main():
             break
         else:
             print("Opción no válida, inténtalo de nuevo.")
-
-def monitorear_con_plugin_especializado():
-    """
-    Monitoreo con análisis especializado por tipo de servicio
-    """
-    print("\n=== MONITOREO CON PLUGINS ESPECIALIZADOS ===")
-    print("1. Avionics - Sistemas de navegación y vuelo")
-    print("2. Asset API - APIs REST y servicios web") 
-    print("3. Runtime - Memoria, CPU y rendimiento")
-    
-    opcion = input("Seleccione plugin (1-3): ")
-    archivo = input("Ruta del archivo de logs: ")
-    
-    try:
-        if opcion == "1":
-            from plugins.avionics import AvionicsMonitor
-            monitor = AvionicsMonitor()
-            plugin_name = "Avionics"
-        elif opcion == "2":
-            from plugins.assetAPI import AssetAPIMonitor
-            monitor = AssetAPIMonitor()
-            plugin_name = "Asset API"
-        elif opcion == "3":
-            from plugins.runtime import RuntimeMonitor
-            monitor = RuntimeMonitor()
-            plugin_name = "Runtime"
-        else:
-            print("Error: Opción no válida")
-            return
-        
-        print(f"\nAnalizando con plugin {plugin_name}")
-        print(f"Archivo: {archivo}")
-        
-        if not os.path.exists(archivo):
-            print(f"Error: Archivo no encontrado - {archivo}")
-            return
-        
-        # Leer y analizar logs
-        with open(archivo, 'r', encoding='utf-8') as f:
-            lineas = f.readlines()[-50:]
-        
-        errores_criticos = 0
-        warnings = 0
-        errores = 0
-        
-        print(f"\nAnalizando {len(lineas)} líneas de log...")
-        print("-" * 60)
-        
-        for linea in lineas:
-            linea = linea.strip()
-            if linea:
-                analisis = monitor.analizar_patron_log(linea)
-                
-                if analisis["nivel"] == "CRITICAL":
-                    errores_criticos += 1
-                    print(f"CRITICO: {linea[:70]}...")
-                elif analisis["nivel"] == "ERROR":
-                    errores += 1
-                    print(f"ERROR: {linea[:70]}...")
-                elif analisis["nivel"] == "WARNING":
-                    warnings += 1
-                    print(f"WARNING: {linea[:70]}...")
-        
-        print("-" * 60)
-        
-        # Evaluación final
-        estado_salud = monitor.evaluar_salud_servicio(lineas)
-        
-        print(f"\n=== RESUMEN DEL ANÁLISIS ===")
-        print(f"Estado del servicio: {estado_salud}")
-        print(f"Errores críticos: {errores_criticos}")
-        print(f"Errores: {errores}")
-        print(f"Warnings: {warnings}")
-        print(f"Líneas analizadas: {len(lineas)}")
-        
-        # Acción de emergencia si es necesario
-        if estado_salud in ["CRITICAL", "ERROR"]:
-            print(f"\nSe detectaron problemas graves en el sistema.")
-            respuesta = input("¿Ejecutar acción de emergencia? (s/N): ")
-            
-            if respuesta.lower() == 's':
-                print(f"\nEjecutando acción de emergencia para {plugin_name}...")
-                exito = monitor.ejecutar_accion_emergencia()
-                print("Acción completada" if exito else "Error en acción de emergencia")
-            else:
-                print("Acción de emergencia cancelada")
-        
-        # Opción de monitoreo continuo
-        if estado_salud == "OK":
-            respuesta = input(f"\n¿Iniciar monitoreo continuo? (s/N): ")
-            if respuesta.lower() == 's':
-                print("Iniciando monitoreo continuo... (Ctrl+C para detener)")
-                from utils.file_utils import monitorear_log
-                monitorear_log(archivo)
-        
-    except ImportError as e:
-        print(f"Error importando plugin: {e}")
-    except Exception as e:
-        print(f"Error durante análisis: {e}")
-
-
 
 if __name__ == "__main__":
     main()
