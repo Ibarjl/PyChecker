@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import os
 import subprocess
 import sys
@@ -31,7 +31,6 @@ def actualizar_estado_sistema(servicios_estado):
 
 def read_from_docker():
     container_name = input("Nombre/ID del contenedor Docker: ")
-=======
 
 import subprocess
 import sys
@@ -45,24 +44,24 @@ def launch_config_editor():
 
 def read_from_docker():
     container_name = input("Nombre o ID del contenedor Docker: ")
->>>>>>> rama_ibar
+
     logs = get_docker_logs(container_name, tail=50)
     print("\n===== LOGS DOCKER =====")
     print(logs)
 
 def read_from_k8s():
     pod_name = input("Nombre del pod en Kubernetes: ")
-<<<<<<< HEAD
+
     namespace = input("Namespace (default si vacío): ") or "default"
 =======
     namespace = input("Namespace (si no ponés nada, es 'default'): ") or "default"
->>>>>>> rama_ibar
+
     logs = get_k8s_pod_logs(pod_name, namespace=namespace, tail=50)
     print("\n===== LOGS KUBERNETES =====")
     print(logs)
 
 def read_from_file():
-<<<<<<< HEAD
+
     file_path = input("Ruta del fichero de logs: ")
     mostrar_logs_archivo(file_path)
 
@@ -345,7 +344,7 @@ def main():
         print("4. Salir")
 
         choice = input("Elige una opción (1-4): ")
->>>>>>> rama_ibar
+
 
         if choice == "1":
             read_from_docker()
@@ -354,7 +353,7 @@ def main():
         elif choice == "3":
             read_from_file()
         elif choice == "4":
-<<<<<<< HEAD
+
             monitor_file_realtime()
         elif choice == "5":
             monitor_configured_repos()
@@ -382,4 +381,4 @@ if __name__ == "__main__":
 
 if __name__ == "__main__":
     main()
->>>>>>> rama_ibar
+

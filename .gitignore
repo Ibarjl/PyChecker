@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -217,4 +217,4 @@ logs/*.json
 =======
 # virtual environment
 frontend/venv
->>>>>>> rama_ibar
+

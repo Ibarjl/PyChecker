@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 """
 API real que se comunica con el backend del healthcheck
 Ya no usa datos simulados - lee el estado real del sistema
@@ -89,4 +89,4 @@ def get_status():
             "last_checked": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         }
     ]
->>>>>>> rama_ibar
+

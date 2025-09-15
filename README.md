@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # ⚠️ WORK IN PROGRESS
 
 # Health Monitor
@@ -43,6 +43,7 @@ health-monitor/
 - Librerías (requirements.txt)
 
 ## Instalación
+
 =======
 
 # Comenzá a usar
@@ -116,7 +117,6 @@ Este sistema está pensado para que cualquier persona pueda supervisar sus servi
 
 ---
 Si tienes dudas sobre alguna carpeta o función, revisa el archivo `README.md` dentro de cada carpeta para más detalles.
->>>>>>> rama_ibar
 
 1. Clonar el repositorio
 

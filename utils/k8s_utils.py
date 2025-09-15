@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 """
 Utilidades para trabajar con Kubernetes de manera más robusta
 """
@@ -12,22 +12,22 @@ except ImportError:
     print("⚠️  Kubernetes client no está disponible. Funcionalidad K8s deshabilitada.")
 =======
 from kubernetes import client, config
->>>>>>> rama_ibar
+
 
 def get_k8s_pod_logs(pod_name: str, namespace: str = "default", tail: int = 100) -> str:
     """
     Lee los últimos logs de un pod en Kubernetes.
-<<<<<<< HEAD
+
     Incluye validación de dependencias y mejor manejo de errores.
 =======
->>>>>>> rama_ibar
+
 
     :param pod_name: Nombre del pod
     :param namespace: Namespace del pod
     :param tail: Número de líneas de logs a recuperar
     :return: Logs como string
     """
-<<<<<<< HEAD
+
     if not K8S_AVAILABLE:
         return "[ERROR] Cliente de Kubernetes no está instalado. Ejecuta: pip install kubernetes"
     
@@ -36,7 +36,7 @@ def get_k8s_pod_logs(pod_name: str, namespace: str = "default", tail: int = 100)
 =======
     try:
         # Cargar configuración según contexto
->>>>>>> rama_ibar
+
         try:
             config.load_incluster_config()  # Dentro del cluster
         except:
@@ -50,7 +50,7 @@ def get_k8s_pod_logs(pod_name: str, namespace: str = "default", tail: int = 100)
             _preload_content=True
         )
         return logs
-<<<<<<< HEAD
+
     except config.ConfigException:
         return "[ERROR] No se pudo cargar configuración de Kubernetes. ¿Tienes kubectl configurado?"
     except client.ApiException as e:
@@ -64,27 +64,27 @@ def get_k8s_pod_logs(pod_name: str, namespace: str = "default", tail: int = 100)
     except Exception as e:
         return f"[ERROR] No se pudieron obtener los logs del pod {pod_name}: {e}"
 
->>>>>>> rama_ibar
+
 
 def stream_k8s_pod_logs(pod_name: str, namespace: str = "default"):
     """
     Genera logs en streaming desde un pod en Kubernetes.
-<<<<<<< HEAD
+
     Incluye validación mejorada.
 =======
->>>>>>> rama_ibar
+
 
     :param pod_name: Nombre del pod
     :param namespace: Namespace del pod
     :yield: Líneas de log en tiempo real
     """
-<<<<<<< HEAD
+
     if not K8S_AVAILABLE:
         yield "[ERROR] Cliente de Kubernetes no está disponible"
         return
     
 =======
->>>>>>> rama_ibar
+
     try:
         try:
             config.load_incluster_config()
@@ -100,7 +100,7 @@ def stream_k8s_pod_logs(pod_name: str, namespace: str = "default"):
         )
         for line in resp.stream():
             yield line.decode("utf-8", errors="replace")
-<<<<<<< HEAD
+
     except config.ConfigException:
         yield "[ERROR] No se pudo cargar configuración de Kubernetes"
     except client.ApiException as e:
@@ -134,4 +134,4 @@ def verificar_k8s_disponible() -> bool:
 =======
     except Exception as e:
         yield f"[ERROR] No se pudo hacer streaming de logs del pod {pod_name}: {e}"
->>>>>>> rama_ibar
+

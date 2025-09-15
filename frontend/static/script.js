@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 // JavaScript mejorado para el dashboard
 console.log('🚀 Health Monitor Dashboard cargado');
 
@@ -205,4 +205,4 @@ window.addEventListener('beforeunload', function () {
 setInterval(() => {
     window.location.reload();
 }, 30000);
->>>>>>> rama_ibar
+
