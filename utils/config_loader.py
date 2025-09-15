@@ -104,7 +104,7 @@ def detectar_logs():
         try:
             if os.path.exists(directorio) and os.path.isdir(directorio):
                 for archivo in os.listdir(directorio):
-                    if archivo.endswith(".log"):
+        # Funciones para cargar y validar la configuración (usá esto para traer la config y chequear que esté todo bien)
                         repo_id = archivo.replace(".log", "")
                         ruta_completa = os.path.abspath(os.path.join(directorio, archivo))
                         repositorios_detectados[repo_id] = {
