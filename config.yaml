@@ -1,0 +1,45 @@
+# Configuración de Health Monitor
+# Este archivo define los límites de reinicio y parámetros para cada servicio
+
+servicios:
+  # Configuración para el plugin Avionics
+  avionics:
+    max_reinicios_por_hora: 3
+    timeout_verificacion_segundos: 30
+    umbral_errores_criticos: 2
+    activar_protocolo_emergencia: true
+    
+  # Configuración para el plugin Asset API  
+  asset_api:
+    max_reinicios_por_hora: 5
+    timeout_verificacion_segundos: 60
+    umbral_errores_criticos: 3
+    tasa_error_maxima_porcentaje: 15
+    
+  # Configuración para el plugin Runtime
+  runtime:
+    max_reinicios_por_hora: 2
+    timeout_verificacion_segundos: 45
+    umbral_memoria_mb: 8000
+    umbral_errores_criticos: 2
+
+# Configuración general del sistema de monitoreo
+general:
+  intervalo_verificacion_segundos: 30
+  log_nivel: "INFO"
+  ruta_logs_sistema: "./logs/health_monitor.log"
+  activar_frontend_web: true
+  puerto_frontend: 5000
+  
+# Configuración de alertas y notificaciones
+alertas:
+  activar_email: false
+  activar_webhook: false
+  webhook_url: ""
+  email_destinatarios: []
+  
+# Configuración de persistencia
+persistencia:
+  guardar_metricas: true
+  ruta_metricas: "./logs/metricas.json"
+  retention_dias: 30

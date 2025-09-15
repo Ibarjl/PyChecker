@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Monitor Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <header>
+        <h1>🏥 Health Monitor Dashboard</h1>
+        <div class="system-info">
+            <p>📊 Estado del Monitor: 
+                <span class="status-badge">
+                    {% if system_info.estado_file_exists %}
+                        🟢 Activo
+                    {% else %}
+                        🟡 Esperando datos
+                    {% endif %}
+                </span>
+            </p>
+            {% if system_info.last_update %}
+                <p>🕒 Última actualización: {{ system_info.last_update }}</p>
+            {% endif %}
+        </div>
+    </header>
+
+    <main>
+        <section class="dashboard">
+            <h2>Estado de Servicios</h2>
+            
+            {% if status %}
+                <table class="status-table">
+                    <thead>
+                        <tr>
+                            <th>🔧 Servicio</th>
+                            <th>📊 Estado</th>
+                            <th>⚠️ Último error</th>
+                            <th>🔄 Reinicios (1h)</th>
+                            <th>🕒 Última comprobación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for service in status %}
+                        <tr class="service-row" data-status="{{ service.status }}">
+                            <td class="service-name">{{ service.name }}</td>
+                            <td class="service-status">
+                                <span class="status-badge status-{{ service.status.lower() }}">
+                                    {% if service.status == 'OK' %}
+                                        ✅ {{ service.status }}
+                                    {% elif service.status == 'WARNING' %}
+                                        ⚠️ {{ service.status }}
+                                    {% elif service.status == 'ERROR' %}
+                                        ❌ {{ service.status }}
+                                    {% elif service.status == 'CRITICAL' %}
+                                        🚨 {{ service.status }}
+                                    {% else %}
+                                        ⏳ {{ service.status }}
+                                    {% endif %}
+                                </span>
+                            </td>
+                            <td class="service-error">{{ service.last_error or '—' }}</td>
+                            <td class="service-restarts">{{ service.restarts_last_hour }}</td>
+                            <td class="service-checked">{{ service.last_checked }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="no-data">
+                    <p>📭 No hay datos de servicios disponibles</p>
+                    <p>Ejecuta el monitoreo desde main.py para ver información aquí</p>
+                </div>
+            {% endif %}
+        </section>
+
+        <section class="actions">
+            <h3>Acciones Rápidas</h3>
+            <div class="action-buttons">
+                <button onclick="refreshData()" class="btn btn-primary">🔄 Actualizar Datos</button>
+                <button onclick="viewSystemInfo()" class="btn btn-secondary">ℹ️ Info del Sistema</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>🔧 Health Monitor v1.0 | 🕒 Auto-refresh cada 30 segundos</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>

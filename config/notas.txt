@@ -1,0 +1,24 @@
+{
+    "repositorios": { <-- nombre del repo
+        "ejemplo_app": {  
+            "nombre": "Aplicación de Ejemplo", <-- nombre de la app, avionics por ejemplo
+            "ruta_logs": "./logs/ejemplo.log", <-- nombre de la ruta donde se guardan los logs
+            "descripcion": "Archivo de ejemplo" <-- Descripción si así lo deseamos
+        },
+        "api_service": { <-- SI es necesario
+            "nombre": "API Service", 
+            "ruta_logs": "../api-service/logs/service.log",
+            "descripcion": "Logs del servicio API"
+        },
+        "background_jobs": { <-- Para los scripts que funcionan fuera del flujo de la app
+            "nombre": "Background Jobs",
+            "ruta_logs": "/var/log/jobs/worker.log",
+            "descripcion": "Logs de tareas en segundo plano"
+        }
+    },
+    "configuracion_general": { <-- Los parametros genericos. Se pueden añadir los que uno quiera
+        "timeout_archivo": 30,
+        "encoding": "utf-8",
+        "mostrar_timestamp": true
+    }
+}
