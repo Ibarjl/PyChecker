@@ -44,8 +44,6 @@ health-monitor/
 
 ## Instalación
 
-=======
-
 # Comenzá a usar
 
 Seguí estos pasos para arrancar con Health Monitor:

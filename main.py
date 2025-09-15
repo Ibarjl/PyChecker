@@ -53,7 +53,7 @@ def read_from_k8s():
     pod_name = input("Nombre del pod en Kubernetes: ")
 
     namespace = input("Namespace (default si vacío): ") or "default"
-=======
+
     namespace = input("Namespace (si no ponés nada, es 'default'): ") or "default"
 
     logs = get_k8s_pod_logs(pod_name, namespace=namespace, tail=50)
@@ -323,7 +323,7 @@ def main():
         print("10. Salir")
 
         choice = input("Elige una opción (1-10): ")
-=======
+
     file_path = input("Ruta del archivo de logs: ")
     try:
         with open(file_path, "r", encoding="utf-8") as f:
@@ -373,12 +373,10 @@ def main():
 
 if __name__ == "__main__":
     main()
-=======
-            print("Saliendo del programa.")
-            break
-        else:
-            print("Opción no válida, inténtalo de nuevo.")
 
-if __name__ == "__main__":
-    main()
+    print("Saliendo del programa.")
+else:
+    print("Opción no válida, inténtalo de nuevo.")
+
+
 

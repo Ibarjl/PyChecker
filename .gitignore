@@ -214,7 +214,7 @@ __marimo__/
 # Health Monitor specific logs
 logs/*.log
 logs/*.json
-=======
+
 # virtual environment
 frontend/venv
 

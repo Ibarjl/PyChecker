@@ -10,7 +10,7 @@ try:
 except ImportError:
     K8S_AVAILABLE = False
     print("⚠️  Kubernetes client no está disponible. Funcionalidad K8s deshabilitada.")
-=======
+
 from kubernetes import client, config
 
 
@@ -19,7 +19,7 @@ def get_k8s_pod_logs(pod_name: str, namespace: str = "default", tail: int = 100)
     Lee los últimos logs de un pod en Kubernetes.
 
     Incluye validación de dependencias y mejor manejo de errores.
-=======
+
 
 
     :param pod_name: Nombre del pod
@@ -32,11 +32,6 @@ def get_k8s_pod_logs(pod_name: str, namespace: str = "default", tail: int = 100)
         return "[ERROR] Cliente de Kubernetes no está instalado. Ejecuta: pip install kubernetes"
     
     try:
-        # Intentar cargar configuración según el contexto
-=======
-    try:
-        # Cargar configuración según contexto
-
         try:
             config.load_incluster_config()  # Dentro del cluster
         except:
@@ -50,7 +45,6 @@ def get_k8s_pod_logs(pod_name: str, namespace: str = "default", tail: int = 100)
             _preload_content=True
         )
         return logs
-
     except config.ConfigException:
         return "[ERROR] No se pudo cargar configuración de Kubernetes. ¿Tienes kubectl configurado?"
     except client.ApiException as e:
@@ -60,7 +54,7 @@ def get_k8s_pod_logs(pod_name: str, namespace: str = "default", tail: int = 100)
             return f"[ERROR] Error de API Kubernetes: {e}"
     except Exception as e:
         return f"[ERROR] Error inesperado obteniendo logs de pod {pod_name}: {e}"
-=======
+
     except Exception as e:
         return f"[ERROR] No se pudieron obtener los logs del pod {pod_name}: {e}"
 
@@ -71,7 +65,7 @@ def stream_k8s_pod_logs(pod_name: str, namespace: str = "default"):
     Genera logs en streaming desde un pod en Kubernetes.
 
     Incluye validación mejorada.
-=======
+
 
 
     :param pod_name: Nombre del pod
@@ -83,7 +77,7 @@ def stream_k8s_pod_logs(pod_name: str, namespace: str = "default"):
         yield "[ERROR] Cliente de Kubernetes no está disponible"
         return
     
-=======
+
 
     try:
         try:
@@ -131,7 +125,6 @@ def verificar_k8s_disponible() -> bool:
         return True
     except:
         return False
-=======
-    except Exception as e:
-        yield f"[ERROR] No se pudo hacer streaming de logs del pod {pod_name}: {e}"
+
+    # Removed unreachable except clause and undefined variable usage
 

@@ -47,7 +47,7 @@ if __name__ == "__main__":
     print("📍 Accede a: http://127.0.0.1:5000/")
     print("🔄 API Status: http://127.0.0.1:5000/api/status")
     app.run(host="0.0.0.0", port=5000, debug=True)
-=======
+
 from flask import Flask, render_template
 from api import get_status
 

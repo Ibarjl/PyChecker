@@ -200,7 +200,7 @@ window.addEventListener('beforeunload', function () {
         clearInterval(autoRefreshInterval);
     }
 });
-=======
+
 // Opcional: refrescar la página cada 30 segundos
 setInterval(() => {
     window.location.reload();

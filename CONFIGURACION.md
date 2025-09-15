@@ -9,8 +9,6 @@ Abre: `config/monitor_config.json`
 
 ### 2. Agregar nuevo repositorio
 
-=======
-
 # Configuración de Health Monitor
 
 ## ¿Cómo agregar o modificar repositorios para monitorear?
@@ -45,7 +43,6 @@ python main.py
 ```
 
 Seleccionar opción 5: "Monitorear repositorios configurados"
-=======
 
 ## ¿Cómo poner en marcha el monitoreo?
 
@@ -70,7 +67,6 @@ Seleccionar opción 5: "Monitorear repositorios configurados"
 - **Archivo no encontrado**: Verificar que la ruta sea correcta
 - **Sin permisos**: Verificar permisos de lectura del archivo
 - **Archivo vacío**: El monitor esperará hasta que aparezcan logs nuevos
-=======
 
 ## Problemas frecuentes y soluciones
 

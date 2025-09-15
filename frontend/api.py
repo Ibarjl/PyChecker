@@ -65,7 +65,7 @@ def get_system_info():
         "estado_file_exists": os.path.exists(ESTADO_PATH),
         "last_update": os.path.getmtime(ESTADO_PATH) if os.path.exists(ESTADO_PATH) else None
     }
-=======
+
 # Este módulo simula la comunicación con el core healthcheck.
 # Más adelante, se puede conectar a un socket, base de datos o API interna.
 
