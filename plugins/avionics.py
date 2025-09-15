@@ -13,6 +13,7 @@ Así puedes modificar la configuración sin cambiar el código fuente.
 import re
 from datetime import datetime
 from typing import Dict, List, Optional
+from utils.reinicio_global import reinicio_simple
 
 class AvionicsMonitor:
     def __init__(self):
@@ -117,6 +118,7 @@ class AvionicsMonitor:
         # Realiza acciones correctivas automáticas
         try:
             print("EMERGENCIA AVIONICA: Activando protocolo de seguridad...")
+            reinicio_simple()
             print("Enviando alerta a torre de control...")
             return True
         except Exception as e:

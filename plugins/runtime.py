@@ -6,6 +6,7 @@ import os
 import json
 from datetime import datetime
 from typing import Dict, List, Optional
+from utils.reinicio_global import reinicio_simple
 
 class RuntimeMonitor:
     def __init__(self):
@@ -81,7 +82,8 @@ class RuntimeMonitor:
     
     def ejecutar_accion_emergencia(self) -> bool:
         try:
-            print("EMERGENCIA RUNTIME: Optimizando sistema...")
+            print("EMERGENCIA RUNTIME: Reiniciando servicios...")
+            reinicio_simple()
             print("Liberando memoria...")
             return True
         except Exception as e:

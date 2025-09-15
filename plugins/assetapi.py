@@ -1,7 +1,9 @@
+
 import re
 import json
 from datetime import datetime
 from typing import Dict, List, Optional
+from utils.reinicio_global import reinicio_simple
 
 class AssetAPIMonitor:
     def __init__(self):
@@ -90,6 +92,7 @@ class AssetAPIMonitor:
         """Ejecuta acciones de emergencia para el servicio API"""
         try:
             print("EMERGENCIA API: Reiniciando servicios...")
+            reinicio_simple()
             # Implementar comandos de reinicio específicos aquí
             return True
         except Exception as e:
