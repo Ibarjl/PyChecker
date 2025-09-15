@@ -1,0 +1,31 @@
+HEALTH-MONITOR
+    |-- CONFIGURACION.md
+    |-- LICENSE
+    |-- README.md
+    |-- config
+    |   |-- monitor_config.json
+    |   `-- notas.txt
+    |-- frontend
+    |   |-- __pycache__
+    |   |-- api.py
+    |   |-- app.py
+    |   |-- estado_actual.json
+    |   |-- static
+    |   `-- templates
+    |-- main.py
+    |-- plugins
+    |   |-- __init__.py
+    |   |-- assetapi.py
+    |   |-- avionics.py
+    |   `-- runtime.py
+    |-- requirements.txt
+    `-- utils
+        |-- __pycache__
+        |-- config_loader.py
+        |-- docker_utils.py
+        |-- file_utils.py
+        |-- k8s_utils.py
+        |-- pruebas.py
+        `-- test_basico.log
+
+8 directories, 20 files

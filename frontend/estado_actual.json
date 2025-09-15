@@ -1,0 +1,9 @@
+[
+    {
+        "name": "Sistema de Monitoreo",
+        "status": "WAITING",
+        "last_error": "Sistema iniciado - esperando primer análisis",
+        "restarts_last_hour": 0,
+        "last_checked": "2025-01-01 00:00:00"
+    }
+]
