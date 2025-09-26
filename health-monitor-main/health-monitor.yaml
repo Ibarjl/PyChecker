@@ -1,0 +1,31 @@
+id: health-monitor
+namespace: monitoring
+
+inputs:
+  - id: mode
+    type: STRING
+    defaults: "file"
+    choices:
+      - file
+      - streaming
+  - id: duration
+    type: INT
+    defaults: 120
+
+tasks:
+  - id: run-health-monitor
+    type: io.kestra.plugin.scripts.python.Script
+    inputFiles:
+      config.yaml: "{{ read('config.yaml') }}"
+      main.py: "{{ read('main.py') }}"
+      requirements.txt: "{{ read('requirements.txt') }}"
+      utils/: "{{ read('utils/**') }}"
+      plugins/: "{{ read('plugins/**') }}"
+    outputFiles:
+      - state/restart_state.json
+      - state/health_status.json
+    beforeCommands:
+      - pip install -r requirements.txt
+    script: |
+      python main.py --mode {{ inputs.mode }} --duration {{ inputs.duration }}
+

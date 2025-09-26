@@ -1,0 +1,31 @@
+.card {
+    background-color: #1e1e2f;
+    color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.card-header {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.status-healthy {
+    color: #4caf50;
+    font-weight: bold;
+}
+
+.status-error {
+    color: #f44336;
+    font-weight: bold;
+}
+
+.log-box {
+    background-color: #12121c;
+    padding: 8px;
+    border-radius: 6px;
+    font-family: monospace;
+    max-height: 200px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+}
